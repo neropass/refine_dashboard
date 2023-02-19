@@ -1,9 +1,7 @@
-import React from 'react'
+import React from 'react';
 
-const PieChart = () => {
-  return (
-    <div>PieChart</div>
-  )
-}
+const PieChart = ({ title, value, series, colors }) => {
+  return <div>PieChart</div>;
+};
 
-export default PieChart
+export default PieChart;
