@@ -1,13 +1,13 @@
 import React from 'react';
 
-import { Refine, AuthProvider } from '@pankod/refine-core';
+import { AuthProvider, Refine } from '@pankod/refine-core';
 import {
-  notificationProvider,
-  RefineSnackbarProvider,
   CssBaseline,
-  GlobalStyles,
-  ReadyPage,
   ErrorComponent,
+  GlobalStyles,
+  notificationProvider,
+  ReadyPage,
+  RefineSnackbarProvider,
 } from '@pankod/refine-mui';
 
 import {
@@ -18,14 +18,24 @@ import {
   VillaOutlined,
 } from '@mui/icons-material';
 
-import dataProvider from '@pankod/refine-simple-rest';
 import { MuiInferencer } from '@pankod/refine-inferencer/mui';
 import routerProvider from '@pankod/refine-react-router-v6';
+import dataProvider from '@pankod/refine-simple-rest';
 import axios, { AxiosRequestConfig } from 'axios';
+import { Header, Layout, Sider, Title } from 'components/layout';
 import { ColorModeContextProvider } from 'contexts';
-import { Title, Sider, Layout, Header } from 'components/layout';
-import { Login, Home, Agents, MyProfile, PropertyDetails, AllProperties, CreateProperty, AgentProfile, EditProperty } from 'pages';
 import { CredentialResponse } from 'interfaces/google';
+import {
+  AgentProfile,
+  Agents,
+  AllProperties,
+  CreateProperty,
+  EditProperty,
+  Home,
+  Login,
+  MyProfile,
+  PropertyDetails,
+} from 'pages';
 import { parseJwt } from 'utils/parse-jwt';
 
 const axiosInstance = axios.create();
@@ -106,30 +116,34 @@ function App() {
           catchAll={<ErrorComponent />}
           resources={[
             {
-              name: 'property',
-              list: MuiInferencer,
-              icon: <VillaOutlined />
+              name: 'properties',
+              list: AllProperties,
+              show: PropertyDetails,
+              create: CreateProperty,
+              edit: EditProperty,
+              icon: <VillaOutlined />,
             },
             {
-              name: 'agent',
-              list: MuiInferencer,
-              icon: <PeopleAltOutlined />
+              name: 'agents',
+              list: Agents,
+              show: AgentProfile,
+              icon: <PeopleAltOutlined />,
             },
             {
-              name: 'review',
-              list: MuiInferencer,
-              icon: <StarOutlineRounded />
+              name: 'reviews',
+              list: Home,
+              icon: <StarOutlineRounded />,
             },
             {
-              name: 'message',
-              list: MuiInferencer,
-              icon: <ChatBubbleOutline />
+              name: 'messages',
+              list: Home,
+              icon: <ChatBubbleOutline />,
             },
             {
-              name: 'My-profile',
+              name: 'my-profile',
               options: { label: 'My profile' },
-              list: MuiInferencer,
-              icon: <AccountCircleOutlined />
+              list: MyProfile,
+              icon: <AccountCircleOutlined />,
             },
           ]}
           Title={Title}
